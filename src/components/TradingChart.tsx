@@ -1,11 +1,14 @@
 import ReactECharts from 'echarts-for-react';
 import {TradeResponse} from "../hooks/useBinance.ts";
+import {LIMIT} from "../containers/TradingChartContainer.tsx";
 
 const TradingChart = ({ data }: { data: TradeResponse[]}) => {
     const timeData = data.flatMap((d) => d.time)
     
     const seriesQty = data.flatMap((d) => d.qty)
     const seriesPrice = data.flatMap((d) => d.price)
+
+    const sortedPrice = data.sort((a, b) => Number(a.price) - Number(b.price))
 
     const options = {
         grid: { top: 8, right: 8, bottom: 24, left: 36 },
@@ -23,8 +26,7 @@ const TradingChart = ({ data }: { data: TradeResponse[]}) => {
                 data: seriesQty,
                 type: 'line',
                 smooth: true,
-
-            },
+            }
         ],
         tooltip: {
             trigger: 'axis',
@@ -39,8 +41,8 @@ const TradingChart = ({ data }: { data: TradeResponse[]}) => {
         },
         yAxis: {
             type: 'value',
-            min: 0.166,
-            max: 0.173
+            min: Number(sortedPrice[0].price) - 1,
+            max: Number(sortedPrice[LIMIT - 1].price) + 2
         },
         series: [
             {
