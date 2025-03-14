@@ -51,6 +51,22 @@ const TradingChart = ({ data }: { data: TradeResponse[]}) => {
                 smooth: true
             }
         ],
+        dataZoom: [
+            {
+                type: 'inside',
+                start: 20,
+                end: 100,
+                minValueSpan: 10
+            },
+            {
+                show: true,
+                type: 'slider',
+                bottom: 60,
+                start: 98,
+                end: 100,
+                minValueSpan: 10
+            }
+        ],
         tooltip: {
             trigger: 'axis',
         },
