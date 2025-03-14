@@ -13,9 +13,9 @@ export interface TradeResponse {
 const fetchBinanceData = async (endpoint: string): Promise<TradeResponse[]> => {
     const response = await fetch(`http://localhost:8080/api/binance/${endpoint}`);
 
-    if (!response.ok) {
-        throw new Error('Error! Cant fetch data from API');
-    }
+    // if (!response.ok) {
+    //     throw new Error('Error! Cant fetch data from API');
+    // }
 
     return response.json();
 }

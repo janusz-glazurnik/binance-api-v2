@@ -39,6 +39,8 @@ const TradingChart = ({ data }: { data: TradeResponse[]}) => {
         },
         yAxis: {
             type: 'value',
+            min: 0.166,
+            max: 0.173
         },
         series: [
             {
@@ -52,10 +54,12 @@ const TradingChart = ({ data }: { data: TradeResponse[]}) => {
         },
     };
 
-    return (<>
-        <ReactECharts option={options} />
-        <ReactECharts option={options2} />
-    </>)
+    return (
+        <>
+            <ReactECharts option={options} />
+            <ReactECharts option={options2} />
+        </>
+    )
 }
 
 export default TradingChart;
