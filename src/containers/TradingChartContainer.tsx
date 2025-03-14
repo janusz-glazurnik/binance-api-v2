@@ -2,19 +2,18 @@ import {useGetBinanceData} from "../hooks/useBinance.ts";
 import TradingChart from "../components/TradingChart.tsx";
 
 const TradingChartContainer = () => {
-    // useQuery
-    const { data, isLoading, error } = useGetBinanceData();
+    const { data, isLoading, error } = useGetBinanceData('trades?symbol=DOGEEUSDT&limit=100');
 
     if (isLoading) {
         return <div>Data is loading... please wait</div>
     }
 
     if (error) {
-        console.log('|-- TradingChartContainer error', error);
+        console.warn('error', error);
         return <div>something bad happened...</div>
     }
 
-    return <TradingChart data={data} />
+    return data && <TradingChart data={data} />
 }
 
 export default TradingChartContainer;

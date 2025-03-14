@@ -1,8 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
 
-// https://api.binance.com
-// /api/v3/trades
-
 export interface TradeResponse {
     id: string;
     price: string;
@@ -13,8 +10,8 @@ export interface TradeResponse {
     isBestMatch: boolean;
 }
 
-const fetchBinanceData = async (): Promise<TradeResponse[]> => {
-    const response = await fetch('http://localhost:8080/api/binance/trades?symbol=BTCUSDT&limit=10');
+const fetchBinanceData = async (endpoint: string): Promise<TradeResponse[]> => {
+    const response = await fetch(`http://localhost:8080/api/binance/${endpoint}`);
 
     if (!response.ok) {
         throw new Error('Error! Cant fetch data from API');
@@ -23,15 +20,16 @@ const fetchBinanceData = async (): Promise<TradeResponse[]> => {
     return response.json();
 }
 
-const useBinance = () => {
+const useBinance = (endpoint: string, interval?: number) => {
     return useQuery({
         queryKey: ['trades'],
-        queryFn: fetchBinanceData,
+        queryFn: () => fetchBinanceData(endpoint),
+        refetchInterval: interval || 0,
     });
 }
 
-export const useGetBinanceData = () => {
-    const { data, isLoading, error } = useBinance();
+export const useGetBinanceData = (endpoint: string, interval?: number) => {
+    const { data, isLoading, error } = useBinance(endpoint, interval);
 
     return { data, isLoading, error };
 }
