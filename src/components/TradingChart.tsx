@@ -1,9 +1,9 @@
 import ReactECharts from 'echarts-for-react';
 import {TradeResponse} from "../hooks/useBinance.ts";
-import {LIMIT} from "../containers/TradingChartContainer.tsx";
+import { LIMIT } from "../containers/TradingChartContainer.tsx";
 
 const TradingChart = ({ data }: { data: TradeResponse[]}) => {
-    const timeData = data.flatMap((d) => d.time)
+    const timeData = data.flatMap((d) => d.time) // replace with real data
     
     const seriesQty = data.flatMap((d) => d.qty)
     const seriesPrice = data.flatMap((d) => d.price)
@@ -51,22 +51,22 @@ const TradingChart = ({ data }: { data: TradeResponse[]}) => {
                 smooth: true
             }
         ],
-        dataZoom: [
-            {
-                type: 'inside',
-                start: 20,
-                end: 100,
-                minValueSpan: 10
-            },
-            {
-                show: true,
-                type: 'slider',
-                bottom: 60,
-                start: 98,
-                end: 100,
-                minValueSpan: 10
-            }
-        ],
+        // dataZoom: [
+        //     {
+        //         type: 'inside',
+        //         start: 20,
+        //         end: 100,
+        //         minValueSpan: 10
+        //     },
+        //     {
+        //         show: true,
+        //         type: 'slider',
+        //         bottom: 20,
+        //         start: 98,
+        //         end: 100,
+        //         minValueSpan: 10
+        //     }
+        // ],
         tooltip: {
             trigger: 'axis',
         },
