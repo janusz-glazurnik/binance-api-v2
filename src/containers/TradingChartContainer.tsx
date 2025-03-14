@@ -1,12 +1,20 @@
 import {useGetBinanceData} from "../hooks/useBinance.ts";
+import TradingChart from "../components/TradingChart.tsx";
 
 const TradingChartContainer = () => {
     // useQuery
-    const { data } = useGetBinanceData();
+    const { data, isLoading, error } = useGetBinanceData();
 
-    console.log('|-- TradingChartContainer data', data);
+    if (isLoading) {
+        return <div>Data is loading... please wait</div>
+    }
 
-    return <div>placeholder container</div>
+    if (error) {
+        console.log('|-- TradingChartContainer error', error);
+        return <div>something bad happened...</div>
+    }
+
+    return <TradingChart data={data} />
 }
 
 export default TradingChartContainer;
